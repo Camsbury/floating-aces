@@ -4,7 +4,7 @@
 ;; URL: https://github.com/Camsbury/priorganize.el
 ;; Created: July 29, 2020
 ;; Keywords: org, todo
-;; Package-Requires: ((emacs "24") (uuid "0.0.3"))
+;; Package-Requires: ((parseedn "20200419.1124") (emacs "24") (babashka "0.1.3")
 ;; Version: 0.1
 ;; Copyright (C) 2020  Cameron Kingsbury
 
@@ -21,6 +21,20 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(require 'uuid)
+(require 'parseedn)
+(require 'f)
+
+(defun floating-aces ()
+  "Runs the program"
+  (message "TBD")) ; TODO: implement
+
+(progn
+  (switch-to-buffer "*render*")
+  (with-current-buffer "*render*"
+    (erase-buffer)
+    (insert (shell-command-to-string "bb --classpath src --main floating-aces.core 'example/game' example"))
+    (org-mode)
+    (outline-show-all)
+    (read-only-mode)))
 
 (provide 'floating-aces)

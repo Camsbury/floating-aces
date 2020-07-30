@@ -1,5 +1,19 @@
 #+TITLE: Floating Aces
 
+* THIS EXTENSION IS IN PROGRESS
+
+* MVP TODO
+** [x] implement the deck data structure on the babashka backend
+** [x] implement the shuffle data structure on the babashka backend
+** [x] implement the overall collection ds
+** [x] render shuffle as org
+** [ ] add descriptions
+** [ ] add tags
+** [ ] display an example "deck" in a read-only org-mode buffer
+** [ ] update to something akin to an interactive "tabulated list mode" based on org-mode-buffer with various commands
+** [ ] provide add priority + flush commands + comparison buffer & prompts (show details of two items and ask about relative priority)
+** [ ] allow for a strictness toggle to flush immediately for a given shuffle
+
 * They just float to the top!
 ** Getting Started
 - M-x ~floating-aces~
