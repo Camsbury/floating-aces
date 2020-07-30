@@ -1,0 +1,5 @@
+#+TITLE: Floating Aces
+
+* They just float to the top!
+** Getting Started
+- M-x ~floating-aces~
