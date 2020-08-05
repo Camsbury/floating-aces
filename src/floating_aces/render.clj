@@ -34,4 +34,3 @@
        (map :card)
        (map card->org)
        (apply str)))
-

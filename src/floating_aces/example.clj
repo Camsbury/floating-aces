@@ -22,7 +22,7 @@
    #uuid "e42f7b2c-c790-4535-a579-e5a0c95f1eb2"
    {:floating-aces.core/name "bob"}})
 
-(def shuffle
+(def example-shuffle
   [#uuid "2006018d-800e-490f-8c17-a8f647e56189"
    #uuid "ccb29058-eff2-46ec-bd3c-885fcb76e9fe"
    #uuid "719d9c4f-18f8-48de-ab9e-2b5cf715fcf1"
@@ -35,5 +35,5 @@
 
 (def game
   {:floating-aces.core/deck deck
-   :floating-aces.core/shuffles {:example shuffle}})
+   :floating-aces.core/shuffles {"example" example-shuffle}})
 

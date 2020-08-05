@@ -4,7 +4,7 @@
    [floating-aces.example :as example])
   (:import (java.util UUID)))
 
-(defn -main [game name]
-  (print (render/shuffle->org game (keyword name))))
+(defn -main [name]
+  (print (render/shuffle->org floating-aces.example/game name)))
 (comment
   (println (UUID/randomUUID)))

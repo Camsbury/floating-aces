@@ -31,10 +31,11 @@
 (progn
   (switch-to-buffer "*render*")
   (with-current-buffer "*render*"
+    (read-only-mode -1)
     (erase-buffer)
-    (insert (shell-command-to-string "bb --classpath src --main floating-aces.core 'example/game' example"))
+    (insert (shell-command-to-string "bb --classpath src --main floating-aces.core example"))
     (org-mode)
     (outline-show-all)
-    (read-only-mode)))
+    (read-only-mode 1)))
 
 (provide 'floating-aces)
