@@ -4,7 +4,7 @@
 ;; URL: https://github.com/Camsbury/priorganize.el
 ;; Created: July 29, 2020
 ;; Keywords: org, todo
-;; Package-Requires: ((parseedn "20200419.1124") (emacs "24") (babashka "0.1.3")
+;; Package-Requires: ((emacs "24") (babashka "0.1.3")
 ;; Version: 0.1
 ;; Copyright (C) 2020  Cameron Kingsbury
 
@@ -21,21 +21,71 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-(require 'parseedn)
 (require 'f)
 
-(defun floating-aces ()
-  "Runs the program"
-  (message "TBD")) ; TODO: implement
+(setq fa-server-name "*floating-aces-server*")
+(setq fa-client-name "*floating-aces-client*")
+(setq fa-socket-path "/tmp/floating-aces.ipc")
 
-(progn
-  (switch-to-buffer "*render*")
-  (with-current-buffer "*render*"
-    (read-only-mode -1)
-    (erase-buffer)
-    (insert (shell-command-to-string "bb --classpath src --main floating-aces.core example"))
-    (org-mode)
-    (outline-show-all)
-    (read-only-mode 1)))
+(defun fa-filter (proc ev)
+  (message "%s" ev))
+
+(defun fa-init ()
+  "Starts the floating aces ipc client and server"
+  (interactive)
+
+  ;; start server
+  (make-process
+   :name fa-server-name
+   :buffer (get-buffer-create fa-server-name)
+   :command (list
+             (concat default-directory "result/bin/floating-aces")
+             fa-socket-path))
+
+  ;; wait for server to start
+  (let ((counter 10))
+    (while (or
+            (/= 0 counter)
+            (not (process-live-p (get-process fa-server-name))))
+      (sleep-for 0 100)
+      (setq counter (- counter 1))))
+
+  ;; start client
+  (make-network-process
+   :name fa-client-name
+   :family 'local
+   :service fa-socket-path
+   :nowait t
+   :coding '(utf-8 . utf-8)
+   :buffer (get-buffer-create fa-client-name)
+   :noquery t
+   :filter #'fa-filter
+   :sentinel #'fa-filter))
+
+(defun fa-quit ()
+  "Quits floating aces"
+  (interactive)
+  (delete-process (get-process fa-server-name))
+  (kill-buffer fa-server-name)
+  (delete-process (get-process fa-client-name))
+  (kill-buffer fa-client-name))
+
+(defun fa-send-message (s)
+  "Sends a message to the server"
+  (process-send-string (get-process fa-client-name) s))
+
+(defun fa-create-card (name)
+  "Creates a card with the given name"
+  (interactive "sCard name: ")
+  (fa-send-message (concat "create-card " name)))
+
+(defun fa-show-deck ()
+  "Shows the deck in an org file"
+  (interactive)
+  (fa-send-message "show-deck"))
+
+(comment
+ (fa-send-message "create-card thing3")
+ (fa-send-message "show-deck"))
 
 (provide 'floating-aces)

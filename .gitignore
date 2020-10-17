@@ -2,4 +2,8 @@
 .envrc
 .nrepl-port
 todo.org
+.clj-kondo/*
+dist/*
+dist-newstyle/*
+result
 *~

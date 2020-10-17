@@ -3,17 +3,14 @@
 * THIS EXTENSION IS IN PROGRESS
 
 * MVP TODO
-** [x] implement the deck data structure on the babashka backend
-** [x] implement the shuffle data structure on the babashka backend
-** [x] implement the overall collection ds
-** [x] render shuffle as org
-** [ ] add descriptions
-** [ ] add tags
-** [ ] display an example "deck" in a read-only org-mode buffer
-** [ ] update to something akin to an interactive "tabulated list mode" based on org-mode-buffer with various commands
-** [ ] provide add priority + flush commands + comparison buffer & prompts (show details of two items and ask about relative priority)
-** [ ] allow for a strictness toggle to flush immediately for a given shuffle
+** initial game started
+*** [ ] add parsed event to the queue unless it is a comparison, or a show
+*** [ ] Maybe the overall render will show EVERYTHING... the deck, the shuffles, the next comparison to resolve, and the event queue
+*** [ ] Things can be blocked by a request for order
+*** [ ] If blocked, the event isn't dropped from the queue and the user is informed
+*** [ ] figure out how to deal with ordering cards (from xndr)
+*** [ ] add another event which is prioritizing two uuids
 
 * They just float to the top!
 ** Getting Started
-- M-x ~floating-aces~
+- M-x ~fa-init~
