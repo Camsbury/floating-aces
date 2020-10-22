@@ -4,7 +4,8 @@
 
 * MVP TODO
 ** initial game started
-*** [ ] add parsed event to the queue unless it is a comparison, or a show
+*** [x] add parsed event to the queue unless it is a comparison, or a show
+**** just add new ones incrementally
 *** [ ] Maybe the overall render will show EVERYTHING... the deck, the shuffles, the next comparison to resolve, and the event queue
 *** [ ] Things can be blocked by a request for order
 *** [ ] If blocked, the event isn't dropped from the queue and the user is informed

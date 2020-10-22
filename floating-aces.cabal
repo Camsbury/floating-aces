@@ -31,6 +31,7 @@ library
   build-depends:       base-noprelude >=4.11
                      , classy-prelude
                      , attoparsec
+                     , data-default
                      , directory
                      , lens
                      , mtl
@@ -46,6 +47,7 @@ executable             floating-aces
   build-depends:       base-noprelude >=4.11
                      , classy-prelude
                      , bytestring
+                     , data-default
                      , directory
                      , floating-aces
                      , mtl

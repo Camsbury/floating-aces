@@ -6,13 +6,14 @@ import Prelude
 --------------------------------------------------------------------------------
 import Control.Monad.State
 --------------------------------------------------------------------------------
-import FloatingAces (FAM, initState, runFA)
+import FloatingAces (FAM, runFA)
 import Network.Socket
   ( Family(..)
   , SocketType(..)
   , SockAddr(..)
   , Socket
   )
+import Data.Default (Default(..))
 --------------------------------------------------------------------------------
 import qualified Network.Socket            as S
 import qualified Network.Socket.ByteString as BS
@@ -31,7 +32,7 @@ main = do
     S.bind socket $ SockAddrUnix socketPath
     S.listen socket S.maxListenQueue
     (conn, _) <- S.accept socket
-    (`runStateT` initState) $ do
+    (`runStateT` def) $ do
       conversation conn
     S.close conn
     S.close socket
