@@ -5,9 +5,6 @@ module FloatingAces.Type
 --------------------------------------------------------------------------------
 import Prelude
 --------------------------------------------------------------------------------
-import Control.Lens.Operators
-import Control.Monad.State
---------------------------------------------------------------------------------
 import Control.Lens (makeFieldsNoPrefix)
 import Data.UUID (UUID)
 import Data.Default (Default(..))
@@ -15,22 +12,39 @@ import Data.Default (Default(..))
 --------------------------------------------------------------------------------
 -- Types
 
-type FAResponse = Text
-type CardName   = Text
-type Card       = Text
-type Deck       = HashMap UUID Card
+type FAResponse  = Text
+type CardName    = Text
+type CardID      = UUID
+type Shuffle     = Vector CardID
+type ShuffleName = Text
 
-type Shuffle    = Vector UUID
+data Card
+  = Card
+  { _cardName :: CardName
+  , _priorityOver :: HashSet CardID
+  } deriving stock (Eq, Show)
+makeFieldsNoPrefix ''Card
 
-data FAEvent
+type Deck = HashMap CardID Card
+
+data FAComparisonRequest
+  = FAComparisonRequest CardID CardID
+  deriving stock (Eq, Show)
+
+type GreaterCardID = CardID
+type LesserCardID  = CardID
+data FAEvent -- split into internal and external events
   = ShowDeck
+  | CreateShuffle ShuffleName
   | CreateCard CardName
+  | ShuffleCard CardID ShuffleName
+  | PriorityOver GreaterCardID LesserCardID
   deriving stock (Eq, Show)
 
 data Game
   = Game
   { _deck :: Deck
-  , _shuffles :: HashMap Text Shuffle
+  , _shuffles :: HashMap ShuffleName Shuffle
   } deriving stock (Eq, Show)
 makeFieldsNoPrefix ''Game
 
@@ -44,6 +58,7 @@ data FAState
   = FAState
   { _game       :: Game
   , _eventQueue :: Vector FAEvent
+  , _comparisonQueue :: Vector FAComparisonRequest
   } deriving stock (Eq, Show)
 makeFieldsNoPrefix ''FAState
 
@@ -51,6 +66,7 @@ instance Default FAState where
   def = FAState
       { _game       = def
       , _eventQueue = mempty
+      , _comparisonQueue = mempty
       }
 
 type FAM = StateT FAState IO

@@ -31,6 +31,7 @@ library
   build-depends:       base-noprelude >=4.11
                      , classy-prelude
                      , attoparsec
+                     , attoparsec-data
                      , data-default
                      , directory
                      , lens

@@ -4,13 +4,16 @@
 
 * MVP TODO
 ** initial game started
-*** [x] add parsed event to the queue unless it is a comparison, or a show
-**** just add new ones incrementally
+*** [ ] event queues on shuffles! - figure out if the event has to do with a particular shuflfe, then cache it there
+*** [ ] finish insert
+**** [ ] bubble up
+**** [ ] with comparison request enqueued
+*** [ ] finish delete
+**** [ ] swap
+**** [ ] bubble down
+**** [ ] with comparison request enqueued
 *** [ ] Maybe the overall render will show EVERYTHING... the deck, the shuffles, the next comparison to resolve, and the event queue
-*** [ ] Things can be blocked by a request for order
-*** [ ] If blocked, the event isn't dropped from the queue and the user is informed
-*** [ ] figure out how to deal with ordering cards (from xndr)
-*** [ ] add another event which is prioritizing two uuids
+**** [ ] user is informed of comparison requests by deck
 
 * They just float to the top!
 ** Getting Started

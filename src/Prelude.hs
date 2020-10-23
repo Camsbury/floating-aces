@@ -2,6 +2,8 @@
 --------------------------------------------------------------------------------
 module Prelude
   ( module ClassyPrelude
+  , module Control.Lens.Operators
+  , module Control.Monad.State
   , throwMaybe
   , throwEither
   , inspect
@@ -9,8 +11,18 @@ module Prelude
   ) where
 --------------------------------------------------------------------------------
 import ClassyPrelude
+import Control.Lens.Operators hiding ((<.>), (<|))
 import Control.Monad.Except
+import Control.Monad.State hiding
+  ( foldM
+  , forM_
+  , mapM_
+  , sequence_
+  , filterM
+  , replicateM
+  )
 --------------------------------------------------------------------------------
+import Control.Lens
 
 
 -- | throws error if Nothing
