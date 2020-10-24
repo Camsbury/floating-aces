@@ -14,7 +14,16 @@
 **** [ ] with comparison request enqueued
 *** [ ] Maybe the overall render will show EVERYTHING... the deck, the shuffles, the next comparison to resolve, and the event queue
 **** [ ] user is informed of comparison requests by deck
+*** [ ] add tests
+*** [ ] add documentation
+
+* [ ] MVP Acceptance Criteria
+** [ ] intelligent insert
+*** [ ] card placed in game
+*** [ ] card shuffled as much as possible
+*** [ ] response gives the comparison needed
 
 * They just float to the top!
 ** Getting Started
-- M-x ~fa-init~
+- M-x ~fa-init~ to start the server/client
+- M-x ~fa-quit~ to close the server/client

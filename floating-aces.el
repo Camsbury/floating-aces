@@ -1,10 +1,10 @@
 ;;; floating aces
 
 ;; Author: Cameron Kingsbury <camsbury7@gmail.com>
-;; URL: https://github.com/Camsbury/priorganize.el
+;; URL: https://github.com/Camsbury/floating-aces.el
 ;; Created: July 29, 2020
 ;; Keywords: org, todo
-;; Package-Requires: ((emacs "24") (babashka "0.1.3")
+;; Package-Requires: ((emacs "24"))
 ;; Version: 0.1
 ;; Copyright (C) 2020  Cameron Kingsbury
 
@@ -30,7 +30,7 @@
 (defun fa-filter (proc ev)
   (message "%s" ev))
 
-(defun fa-init ()
+(defun fa-init () ;; TODO: Jump to client and run initial request
   "Starts the floating aces ipc client and server"
   (interactive)
 
@@ -79,13 +79,13 @@
   (interactive "sCard name: ")
   (fa-send-message (concat "create-card " name)))
 
-(defun fa-show-deck ()
+(defun fa-show-game ()
   "Shows the deck in an org file"
   (interactive)
-  (fa-send-message "show-deck"))
+  (fa-send-message "show-game"))
 
 (comment
  (fa-send-message "create-card thing3")
- (fa-send-message "show-deck"))
+ (fa-send-message "show-game"))
 
 (provide 'floating-aces)
