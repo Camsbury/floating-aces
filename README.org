@@ -14,6 +14,8 @@
 **** [ ] with comparison request enqueued
 *** [ ] Maybe the overall render will show EVERYTHING... the deck, the shuffles, the next comparison to resolve, and the event queue
 **** [ ] user is informed of comparison requests by deck
+*** [ ] add tests
+*** [ ] add documentation
 
 * They just float to the top!
 ** Getting Started

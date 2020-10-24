@@ -14,7 +14,8 @@ library
   exposed-modules:     Prelude
                      , FloatingAces
   other-modules:       FloatingAces.Type
-                     , FloatingAces.Parser
+                     , FloatingAces.Parse
+                     , FloatingAces.Render
   default-extensions:  NoImplicitPrelude
                        DerivingStrategies
                        FlexibleContexts
@@ -36,6 +37,8 @@ library
                      , directory
                      , lens
                      , mtl
+                     , pandoc
+                     , pandoc-types
                      , uuid
                      , vector
 

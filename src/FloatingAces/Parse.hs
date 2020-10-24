@@ -1,4 +1,4 @@
-module FloatingAces.Parser (parseEvent) where
+module FloatingAces.Parse (parseEvent) where
 --------------------------------------------------------------------------------
 import Prelude
 --------------------------------------------------------------------------------
@@ -12,35 +12,35 @@ import qualified Data.UUID as UUID
 import Data.Attoparsec.Text (Parser)
 --------------------------------------------------------------------------------
 
-showDeckParser :: Parser FAEvent
-showDeckParser = do
-  AP.string "show-deck"
-  pure $ ShowDeck
+showGameParser :: Parser GameEvent
+showGameParser = do
+  AP.string "show-game"
+  pure $ ShowGame
 
-createCardParser :: Parser FAEvent
+createCardParser :: Parser GameEvent
 createCardParser = do
   AP.string "create-card"
   AP.space
   name <- AP.takeTill C.isSpace
   pure $ CreateCard name
 
-createShuffleParser :: Parser FAEvent
+createShuffleParser :: Parser GameEvent
 createShuffleParser = do
   AP.string "create-shuffle"
   AP.space
   name <- AP.takeTill C.isSpace
   pure $ CreateShuffle name
 
-shuffleCardParser :: Parser FAEvent
+shuffleCardParser :: Parser GameEvent
 shuffleCardParser = do
   AP.string "shuffle-card"
   AP.space
   cardID <- AP.uuid
   AP.space
-  shuffleName <- AP.takeTill C.isSpace
-  pure $ ShuffleCard cardID shuffleName
+  shuffleID <- AP.uuid
+  pure $ ShuffleCard cardID shuffleID
 
-priorityOverParser :: Parser FAEvent
+priorityOverParser :: Parser GameEvent
 priorityOverParser = do
   AP.string "priority-over"
   AP.space
@@ -49,14 +49,14 @@ priorityOverParser = do
   lesserCardID <- AP.uuid
   pure $ PriorityOver greaterCardID lesserCardID
 
-faParser :: Parser FAEvent
+faParser :: Parser GameEvent
 faParser
-  =   showDeckParser
+  =   showGameParser
   <|> createShuffleParser
   <|> createCardParser
   <|> shuffleCardParser
   <|> priorityOverParser
 
 -- | Parses Raw Text into a Floating Aces Event
-parseEvent :: Text -> Either String FAEvent
+parseEvent :: Text -> Either String GameEvent
 parseEvent = AP.parseOnly faParser

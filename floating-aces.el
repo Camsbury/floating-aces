@@ -79,13 +79,13 @@
   (interactive "sCard name: ")
   (fa-send-message (concat "create-card " name)))
 
-(defun fa-show-deck ()
+(defun fa-show-game ()
   "Shows the deck in an org file"
   (interactive)
-  (fa-send-message "show-deck"))
+  (fa-send-message "show-game"))
 
 (comment
  (fa-send-message "create-card thing3")
- (fa-send-message "show-deck"))
+ (fa-send-message "show-game"))
 
 (provide 'floating-aces)
